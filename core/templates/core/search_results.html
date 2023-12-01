@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">Search Results</h2>
+    <div class="row">
+        {% if animes %}
+            {% for anime in animes %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if anime.images and anime.images.jpg and anime.images.jpg.small_image_url %}
+                            <img src="{{ anime.images.jpg.small_image_url }}" class="card-img-top" alt="{{ anime.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ anime.title }}</h5>
+                            {% if anime.synopsis %}
+                                <p class="card-text">{{ anime.synopsis|slice:":300" }}</p>
+                            {% else %}
+                                <p class="card-text">No synopsis available.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col">
+                <p>No results found.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

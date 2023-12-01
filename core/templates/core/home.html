@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <div class="card mt-4" style="max-width: 600px; margin: auto;">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Top Animes</h2>
+
+      <div id="carouselTopAnimes" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          {% for anime in top_animes %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ anime.title }}</h5>
+                    <!-- Adicione mais informações conforme necessário -->
+                </div>
+                <img src="{% if anime.images and anime.images.jpg and anime.images.jpg.image_url %}{{ anime.images.jpg.image_url }}{% else %}{{ your_placeholder_image_url }}{% endif %}" class="d-block w-100 carousel-image" alt="{{ anime.title }}">
+            </div>
+          {% endfor %}
+        </div>
+        <!-- Botões de avançar e voltar -->
+        <a class="carousel-control-prev" href="#carouselTopAnimes" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselTopAnimes" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
